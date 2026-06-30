@@ -78,15 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Renthality" },
-      { name: "description", content: "Renthality — digital identity card." },
+      // 👇 Nouvelle description simple et efficace
+      { name: "description", content: "Renthality — digital card." },
       { property: "og:title", content: "Renthality" },
-      { property: "og:description", content: "Renthality — digital identity card." },
+      { property: "og:description", content: "Renthality — digital card." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Renthality" },
-      { name: "twitter:description", content: "Renthality — digital identity card." },
-      { property: "og:image", content: "https://renthality.cc/favicon.png" },
-      { name: "twitter:image", content: "https://renthality.cc/favicon.png" },
+      { name: "twitter:description", content: "Renthality — digital card." },
+      // ❌ Les lignes og:image et twitter:image ont été supprimées pour enlever le bloc d'image à droite
     ],
     links: [
       { rel: "icon", href: "/favicon.png", type: "image/png" },
