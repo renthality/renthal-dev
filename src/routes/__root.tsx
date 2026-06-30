@@ -77,15 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Renthality" },
-      // 👇 Nouvelle description simple et efficace
+      // 👇 Le titre principal a été modifié ici
+      { title: "Renthality.cc" },
       { name: "description", content: "Renthality — digital card." },
-      { property: "og:title", content: "Renthality" },
+      { property: "og:title", content: "Renthality.cc" },
       { property: "og:description", content: "Renthality — digital card." },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "Renthality" },
+      { name: "twitter:title", content: "Renthality.cc" },
       { name: "twitter:description", content: "Renthality — digital card." },
-      // ❌ Les lignes og:image et twitter:image ont été supprimées pour enlever le bloc d'image à droite
     ],
     links: [
       { rel: "icon", href: "/favicon.png", type: "image/png" },
