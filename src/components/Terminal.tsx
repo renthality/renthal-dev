@@ -1,24 +1,38 @@
 import { useEffect, useRef, useState } from "react";
+import { SnakeGame } from "./SnakeGame";
 
 type Line = { kind: "in" | "out"; text: string };
 
 const PROMPT = "visitor@renthality:~$ ";
 
-const responses: Record<string, string[]> = {
-  help: ["available commands:", "  about · socials · steam · discord · spotify · contact · clear · help"],
-  about: ["Renthal — cybersecurity student in Paris.", "interests: dev · gaming · security · automation."],
-  socials: ["steam · discord · telegram · instagram · spotify · twitch"],
-  steam: ["→ opening steam profile..."],
-  discord: ["→ tag: renthal#0x3b"],
-  spotify: ["→ now playing: HOME — Resonance"],
-  contact: ["→ telegram preferred. dm open."],
+const links: Record<string, { url: string; label: string }> = {
+  steam: { url: "https://steamcommunity.com/id/2o5", label: "steam" },
+  discord: { url: "https://discord.com/users/372386857314418688", label: "discord" },
+  telegram: { url: "https://t.me/renthality", label: "telegram" },
+  instagram: { url: "https://www.instagram.com/renthality", label: "instagram" },
+  spotify: { url: "https://open.spotify.com/user/21vybuvzvxxfudqrbfmbvqjba", label: "spotify" },
+  twitch: { url: "https://www.twitch.tv/renthality", label: "twitch" },
 };
+
+const HELP = [
+  "available commands:",
+  "  help     — show this list",
+  "  clear    — wipe the buffer",
+  "  snake    — open snake game",
+  "  spotify  — open spotify profile",
+  "  steam    — open steam profile",
+  "  discord  — open discord profile",
+  "  telegram — open telegram",
+  "  instagram— open instagram",
+  "  twitch   — open twitch channel",
+];
 
 export function Terminal({ open, onClose, onUnlock }: { open: boolean; onClose: () => void; onUnlock: () => void }) {
   const [lines, setLines] = useState<Line[]>([
     { kind: "out", text: "renthality.term v2.0 — type 'help' to start" },
   ]);
   const [input, setInput] = useState("");
+  const [snake, setSnake] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -35,19 +49,29 @@ export function Terminal({ open, onClose, onUnlock }: { open: boolean; onClose: 
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { if (snake) setSnake(false); else onClose(); } };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  }, [open, onClose, snake]);
 
   const run = (raw: string) => {
     const cmd = raw.trim().toLowerCase();
     if (!cmd) return;
     if (cmd === "clear") { setLines([]); return; }
     const newLines: Line[] = [{ kind: "in", text: PROMPT + raw }];
-    const out = responses[cmd];
-    if (out) newLines.push(...out.map((t) => ({ kind: "out" as const, text: t })));
-    else newLines.push({ kind: "out", text: `command not found: ${cmd}. try 'help'.` });
+    if (cmd === "help") {
+      newLines.push(...HELP.map((t) => ({ kind: "out" as const, text: t })));
+    } else if (cmd === "snake") {
+      newLines.push({ kind: "out", text: "→ launching snake.exe ... (esc to exit)" });
+      setSnake(true);
+    } else if (links[cmd]) {
+      const { url, label } = links[cmd];
+      newLines.push({ kind: "out", text: `→ opening ${label} ...` });
+      newLines.push({ kind: "out", text: `   ${url}` });
+      window.open(url, "_blank", "noopener,noreferrer");
+    } else {
+      newLines.push({ kind: "out", text: `command not found: ${cmd}. try 'help'.` });
+    }
     setLines((prev) => [...prev, ...newLines]);
   };
 
@@ -74,6 +98,11 @@ export function Terminal({ open, onClose, onUnlock }: { open: boolean; onClose: 
           {lines.map((l, i) => (
             <div key={i} className="whitespace-pre-wrap leading-relaxed">{l.text}</div>
           ))}
+          {snake && (
+            <div className="my-3">
+              <SnakeGame onExit={() => setSnake(false)} />
+            </div>
+          )}
           <form onSubmit={(e) => { e.preventDefault(); run(input); setInput(""); }} className="mt-2 flex items-center gap-1">
             <span className="text-foreground/60">{PROMPT}</span>
             <input

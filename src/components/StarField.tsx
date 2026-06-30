@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-type Star = { x: number; y: number; z: number; r: number; tw: number };
+type Star = { x: number; y: number; z: number; r: number; tw: number; vy: number };
 type Shooting = { x: number; y: number; vx: number; vy: number; life: number; max: number };
 
 export function StarField() {
@@ -29,6 +29,7 @@ export function StarField() {
         z: Math.random() * 1 + 0.2,
         r: Math.random() * 1.2 + 0.2,
         tw: Math.random() * Math.PI * 2,
+        vy: 0.2 + Math.random() * 0.8,
       }));
     };
     resize();
@@ -72,6 +73,11 @@ export function StarField() {
 
       for (const s of stars) {
         s.tw += 0.02;
+        s.y += s.vy * s.z;
+        if (s.y > window.innerHeight + 4) {
+          s.y = -4;
+          s.x = Math.random() * window.innerWidth;
+        }
         const tw = (Math.sin(s.tw) + 1) / 2;
         const px = s.x + mouse.current.x * s.z;
         const py = s.y + mouse.current.y * s.z;
@@ -79,6 +85,13 @@ export function StarField() {
         ctx.fillStyle = `rgba(255,255,255,${0.3 + tw * 0.6 * s.z})`;
         ctx.arc(px, py, s.r * s.z, 0, Math.PI * 2);
         ctx.fill();
+        // soft trail
+        ctx.strokeStyle = `rgba(255,255,255,${0.15 * s.z})`;
+        ctx.lineWidth = s.r * s.z * 0.8;
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(px, py - 6 * s.z);
+        ctx.stroke();
       }
 
       shooting = shooting.filter((sh) => {
