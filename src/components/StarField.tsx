@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-type Star = { x: number; y: number; z: number; r: number; tw: number };
+type Star = { x: number; y: number; z: number; r: number; tw: number; vy: number };
 type Shooting = { x: number; y: number; vx: number; vy: number; life: number; max: number };
 
 export function StarField() {
