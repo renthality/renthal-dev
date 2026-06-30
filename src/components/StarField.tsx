@@ -29,6 +29,7 @@ export function StarField() {
         z: Math.random() * 1 + 0.2,
         r: Math.random() * 1.2 + 0.2,
         tw: Math.random() * Math.PI * 2,
+        vy: 0.2 + Math.random() * 0.8,
       }));
     };
     resize();
