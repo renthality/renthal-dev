@@ -47,7 +47,7 @@ function Icon({ s }: { s: Social }) {
     >
       {s.icon}
       <span className="pointer-events-none absolute -top-9 whitespace-nowrap rounded-md border border-white/10 bg-black/80 px-2 py-1 text-[10px] uppercase tracking-[0.15em] text-foreground/80 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-        {s.name} · {s.tip}
+        {s.name.toUpperCase()}
       </span>
     </a>
   );
