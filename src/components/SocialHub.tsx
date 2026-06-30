@@ -1,9 +1,9 @@
 import { useRef, type ReactNode } from "react";
 
-type Social = { name: string; tip: string; href: string; icon: ReactNode };
+type Social = { name: string; href: string; icon: ReactNode };
 
 const socials: Social[] = [
-  { name: "Steam", tip: "Gaming Profile", href: "https://steamcommunity.com/id/2o5", icon: (
+  { name: "Steam", href: "https://steamcommunity.com/id/2o5", icon: (
     <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M12 0C5.4 0 .1 5 0 11.3l6.4 2.7c.5-.4 1.2-.6 1.9-.6h.2l2.9-4.2v-.1c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5h-.1L11.6 16v.2c0 1.9-1.5 3.4-3.4 3.4-1.6 0-3-1.1-3.3-2.6L.4 15.2C1.8 20.3 6.5 24 12 24c6.6 0 12-5.4 12-12S18.6 0 12 0zM7.5 18.2l-1.5-.6c.3.6.7 1 1.4 1.3 1.4.6 3 0 3.6-1.4.3-.7.3-1.4 0-2.1-.3-.7-.8-1.2-1.5-1.5-.7-.3-1.4-.3-2 0l1.5.6c1 .4 1.5 1.6 1.1 2.6-.4 1-1.6 1.5-2.6 1.1zm10.5-8.7c0-1.7-1.3-3-3-3s-3 1.3-3 3 1.3 3 3 3 3-1.3 3-3zm-5.2 0c0-1.2 1-2.2 2.2-2.2s2.2 1 2.2 2.2-1 2.2-2.2 2.2-2.2-1-2.2-2.2z"/></svg>
   )},
   { name: "Discord", tip: "Community", href: "https://discord.com/users/372386857314418688", icon: (
