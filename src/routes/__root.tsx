@@ -83,6 +83,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Renthality — digital identity card." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Renthality" },
+      { name: "twitter:description", content: "Renthality — digital identity card." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bc43f62-3c60-40e0-8725-4c8e30bb4f05/id-preview-de75367a--36d5b514-2001-40b9-9b5e-bac5eff87dec.lovable.app-1782855535385.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5bc43f62-3c60-40e0-8725-4c8e30bb4f05/id-preview-de75367a--36d5b514-2001-40b9-9b5e-bac5eff87dec.lovable.app-1782855535385.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
