@@ -36,7 +36,7 @@ function Icon({ s }: { s: Social }) {
         const r = el.getBoundingClientRect();
         const dx = e.clientX - (r.left + r.width / 2);
         const dy = e.clientY - (r.top + r.height / 2);
-        el.style.transform = `translate(${dx * 0.25}px, ${dy * 0.25}px) scale(1.15)`;
+        el.style.transform = `translate(${dx * 0.08}px, ${dy * 0.08}px) scale(1.08)`;
       }}
       onMouseLeave={() => {
         if (ref.current) ref.current.style.transform = "";
