@@ -38,6 +38,7 @@ function Index() {
         <Status />
         <SocialHub onUnlock={() => unlock("social")} />
         <IdentityCard />
+        <CS2Config />
 
         <button
           onClick={() => { setTermOpen(true); unlock("terminal"); }}
