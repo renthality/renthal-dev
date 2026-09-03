@@ -6,6 +6,7 @@ import { Hero } from "@/components/Hero";
 import { Status } from "@/components/Status";
 import { SocialHub } from "@/components/SocialHub";
 import { IdentityCard } from "@/components/IdentityCard";
+import { CS2Config } from "@/components/cs2/CS2Config";
 import { Terminal } from "@/components/Terminal";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { AchievementToast, useAchievements } from "@/components/Achievements";
@@ -38,6 +39,7 @@ function Index() {
         <Status />
         <SocialHub onUnlock={() => unlock("social")} />
         <IdentityCard />
+        <CS2Config />
 
         <button
           onClick={() => { setTermOpen(true); unlock("terminal"); }}
